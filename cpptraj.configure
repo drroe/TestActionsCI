@@ -548,8 +548,8 @@ TestProgram() {
     else
       COMPILE_ERROR_LINE=$COMPILELINE
       COMPILE_ERROR_MESSAGE=`cat $COMPERR`
-      #echo "DEBUG: Error: $COMPILE_ERROR_LINE"
-      #echo "DEBUG: Error: $COMPILE_ERROR_MESSAGE"
+      echo "DEBUG: Error: $COMPILE_ERROR_LINE"
+      echo "DEBUG: Error: $COMPILE_ERROR_MESSAGE"
       rm $COMPERR $COMPOUT
       return 1
     fi
@@ -880,7 +880,7 @@ DetermineFlink() {
       else
         report='quiet'
       fi
-      #echo "DEBUG: Testing $desc flink $use_flink pthread $use_pthread $report"
+      echo "DEBUG: Testing $desc flink $use_flink pthread $use_pthread $report"
       TestProgram $report "$desc" "$CXX" "$CXXFLAGS" testp.cpp "$libs_to_use"
       if [ $? -eq 0 ] ; then
         # Compile/run worked.
