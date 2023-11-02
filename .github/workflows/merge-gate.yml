@@ -105,7 +105,7 @@ jobs:
             git clone https://github.com/Amber-MD/cpptraj.git
             cd cpptraj
             export MAKE_COMMAND='make -j2'
-            ./configure --buildlibs ${BUILD_FLAGS} ${COMPILER}
+            ./configure ${BUILD_FLAGS} ${COMPILER}
             source cpptraj.sh
             make -j2 install
           fi
