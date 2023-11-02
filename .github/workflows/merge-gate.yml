@@ -101,7 +101,7 @@ jobs:
             export PATH=$installdir/bin:$PATH
           else
             export LD_LIBRARY_PATH=$HOME/lib:${LD_LIBRARY_PATH}
-            git clone git@github.com:Amber-MD/cpptraj.git
+            git clone https://github.com/Amber-MD/cpptraj.git
             cd cpptraj
             ./configure --buildlibs ${BUILD_FLAGS} ${COMPILER}
             source cpptraj.sh
