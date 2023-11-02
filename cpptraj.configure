@@ -2243,9 +2243,9 @@ BasicChecks() {
     fi
   fi
   # If we are using the bundled ARPACK then we will need C++/Fortran linking.
-  if [ "${LIB_STAT[$LARPACK]}" = 'bundled' ] ; then
-    REQUIRES_FLINK=1
-  fi
+  #if [ "${LIB_STAT[$LARPACK]}" = 'bundled' ] ; then
+  #  REQUIRES_FLINK=1
+  #fi
   # TODO if we skipped checks we may need the FLINK flag enabled
   # Binary suffix
   if [ $USE_MPI -ne 0    ] ; then SFX=$SFX".MPI"  ; fi
