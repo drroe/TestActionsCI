@@ -548,8 +548,8 @@ TestProgram() {
     else
       COMPILE_ERROR_LINE=$COMPILELINE
       COMPILE_ERROR_MESSAGE=`cat $COMPERR`
-      echo "DEBUG: Error: $COMPILE_ERROR_LINE"
-      echo "DEBUG: Error: $COMPILE_ERROR_MESSAGE"
+      #echo "DEBUG: Error: $COMPILE_ERROR_LINE"
+      #echo "DEBUG: Error: $COMPILE_ERROR_MESSAGE"
       rm $COMPERR $COMPOUT
       return 1
     fi
@@ -880,7 +880,7 @@ DetermineFlink() {
       else
         report='quiet'
       fi
-      echo "DEBUG: Testing $desc flink $use_flink pthread $use_pthread $report"
+      #echo "DEBUG: Testing $desc flink $use_flink pthread $use_pthread $report"
       TestProgram $report "$desc" "$CXX" "$CXXFLAGS" testp.cpp "$libs_to_use"
       if [ $? -eq 0 ] ; then
         # Compile/run worked.
@@ -910,7 +910,6 @@ DetermineFlink() {
 }
 
 TestMathlib() {
-  echo "DEBUG: Entering TestMathlib()"
   cat > testp.cpp <<EOF
 #include <cstdio>
 extern "C" {
@@ -932,8 +931,7 @@ int main() {
 EOF
   check_lblas=0
   if [ "${LIB_MAKE[$LBLAS]}" != 'yes' ] ; then
-    #DetermineFlink silent "  Checking LAPACK/BLAS" "${LIB_FLAG[$LLAPACK]} ${LIB_FLAG[$LBLAS]}"
-    DetermineFlink "  Checking LAPACK/BLAS (Fortran linking)" "${LIB_FLAG[$LLAPACK]} ${LIB_FLAG[$LBLAS]}"
+    DetermineFlink silent "  Checking LAPACK/BLAS" "${LIB_FLAG[$LLAPACK]} ${LIB_FLAG[$LBLAS]}"
     check_lblas=$?
     rebuild_math=$REBUILDOPT
   else
@@ -2243,9 +2241,9 @@ BasicChecks() {
     fi
   fi
   # If we are using the bundled ARPACK then we will need C++/Fortran linking.
-  #if [ "${LIB_STAT[$LARPACK]}" = 'bundled' ] ; then
-  #  REQUIRES_FLINK=1
-  #fi
+  if [ "${LIB_STAT[$LARPACK]}" = 'bundled' ] ; then
+    REQUIRES_FLINK=1
+  fi
   # TODO if we skipped checks we may need the FLINK flag enabled
   # Binary suffix
   if [ $USE_MPI -ne 0    ] ; then SFX=$SFX".MPI"  ; fi
